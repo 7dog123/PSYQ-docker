@@ -12,11 +12,14 @@ ENV PSYQ_PATH ~/.wine/drive_c/psyq/bin
 ENV TMPDIR ~/.wine/drive_c/tmpdir
 ENV PATH $PATH:~/.wine/drive_c/psyq/bin$PATH
 
-RUN dpkg --add-architecture i386
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive TZ=US/Central \
     apt-get install -y git wine build-essential \
-    libtinyxml2-dev cmake wget wine32 dosbox unzip
+    libtinyxml2-dev cmake wget 
+
+RUN dpkg --add-architecture i386
+RUN apt-get update
+RUN apt-get install -y wine32 dosbox unzip
 RUN apt-get clean
 
 WORKDIR /usr/local/src
